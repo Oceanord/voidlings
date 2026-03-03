@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOIDLINGS — The Threshold</title>
+<meta name="theme-color" content="#03010a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --void:#03010a;
+  --blue:#0a4fff;
+  --btc:#f7931a;
+  --red:#e81c1c;
+  --ash:#7a7a8a;
+  --pale:#d4d0cc;
+}
+
+html,body{
+  height:100%;
+  background:var(--void);
+  font-family:'Crimson Pro',serif;
+  color:var(--pale);
+  overflow:auto;
+}
+
+/* STAR CANVAS */
+#stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  right:0;
+  z-index:100;
+  padding:1.6rem 3rem;
+}
+
+.nav-x{
+  font-family:'Share Tech Mono',monospace;
+  font-size:1rem;
+  letter-spacing:.2em;
+  text-decoration:none;
+  color:var(--ash);
+  transition:.3s;
+}
+
+.nav-x:hover{
+  color:#fff;
+  text-shadow:0 0 12px rgba(255,255,255,.4);
+}
+
+/* PAGES */
+.page{
+  position:fixed;
+  inset:0;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:6rem 2rem 4rem;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:opacity 1.2s ease,transform 1.2s ease;
+}
+
+.page.active{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+#gallery{
+  overflow-y:auto;
+  justify-content:flex-start;
+  padding-top:6rem;
+}
+
+/* HERO */
+.hero-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(3rem,14vw,8rem);
+  color:#fff;
+  animation:breath 7s ease-in-out infinite;
+}
+
+@keyframes breath{
+  0%{opacity:.55;text-shadow:0 0 10px rgba(10,79,255,.3)}
+  50%{opacity:1;text-shadow:0 0 40px rgba(10,79,255,.8)}
+  100%{opacity:.6;text-shadow:0 0 15px rgba(10,79,255,.3)}
+}
+
+.hero-byline{
+  font-family:'Cinzel Decorative',serif;
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  color:#8aa4ff;
+  margin-top:.8rem;
+  opacity:.7;
+}
+
+.hero-manifesto{
+  max-width:520px;
+  margin-top:2rem;
+  font-style:italic;
+  color:rgba(255,255,255,.85);
+  line-height:1.9;
+}
+
+.gateway-line{
+  margin-top:3rem;
+  font-family:'Cinzel Decorative',serif;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--btc);
+  font-size:.95rem;
+  line-height:2;
+}
+
+.btn{
+  margin:4rem 0 3rem;
+  font-family:'Share Tech Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  background:none;
+  padding:.6rem 1.4rem;
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+.threshold-btn{
+  border:1px solid rgba(232,28,28,.6);
+  color:var(--red);
+  animation:redGlow 5s ease-in-out infinite;
+}
+
+@keyframes redGlow{
+  0%{box-shadow:0 0 4px rgba(232,28,28,.3)}
+  50%{box-shadow:0 0 20px rgba(232,28,28,.9)}
+  100%{box-shadow:0 0 4px rgba(232,28,28,.3)}
+}
+
+.threshold-btn:hover{
+  background:var(--red);
+  color:#fff;
+}
+
+.return-btn{
+  border:1px solid rgba(255,255,255,.4);
+  color:#fff;
+  animation:whiteGlow 5s ease-in-out infinite;
+}
+
+@keyframes whiteGlow{
+  0%{box-shadow:0 0 4px rgba(255,255,255,.25)}
+  50%{box-shadow:0 0 20px rgba(255,255,255,.8)}
+  100%{box-shadow:0 0 4px rgba(255,255,255,.25)}
+}
+
+.return-btn:hover{
+  background:#fff;
+  color:#000;
+}
+
+/* GALLERY */
+.gallery-heading{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1rem,3vw,1.6rem);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  margin-top:1rem;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:2px;
+  width:100%;
+  max-width:1100px;
+  margin-top:3rem;
+}
+
+@media(max-width:600px){
+  .gallery-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+.art-card{
+  position:relative;
+  cursor:pointer;
+  overflow:hidden;
+  background:#000;
+  transition:box-shadow .4s ease;
+}
+
+.art-card img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  filter:brightness(.9);
+  transition:.6s;
+}
+
+.art-card:hover{
+  box-shadow:0 0 20px rgba(10,79,255,.6);
+}
+
+.art-card:hover img{
+  transform:scale(1.05);
+  filter:brightness(1.1);
+}
+
+.art-card.claimed{
+  cursor:default;
+}
+
+.art-card.claimed img{
+  filter:grayscale(100%) brightness(.45) contrast(.9);
+}
+
+/* MODAL */
+#modal{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:rgba(0,0,0,.96);
+  text-align:center;
+  padding:2rem;
+}
+
+#modal img{
+  max-width:280px;
+  margin-bottom:2rem;
+  box-shadow:0 0 60px rgba(10,79,255,.4);
+}
+
+.modal-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:1rem;
+  letter-spacing:.25em;
+  margin-bottom:.8rem;
+}
+
+.modal-subtle{
+  font-size:.85rem;
+  color:var(--ash);
+  margin-bottom:2rem;
+}
+
+.modal-btn{
+  padding:.8rem 2rem;
+  background:none;
+  border:1px solid var(--btc);
+  color:var(--btc);
+  font-family:'Share Tech Mono',monospace;
+  font-size:.6rem;
+  letter-spacing:.35em;
+  cursor:pointer;
+}
+
+.modal-btn:hover{
+  background:var(--btc);
+  color:#000;
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<nav>
+  <a href="https://x.com/oceanord28" target="_blank" class="nav-x">X</a>
+</nav>
+
+<div class="page active" id="hero">
+ <h1 class="hero-title">THE VOID</h1>
+  <p class="hero-byline">By Ocean</p>
+  <p class="hero-manifesto">
+    Forged from the depths of emptiness, chaos, and emotion.<br>
+    Drawn in the quiet hours.<br>
+    Raw art from the void.
+  </p>
+  <p class="gateway-line">
+    Not all will enter.<br>
+    Only those who resonate.
+  </p>
+  <button class="btn threshold-btn" onclick="showPage('gallery')">Cross the Threshold</button>
+</div>
+
+<div class="page" id="gallery">
+  <h2 class="gallery-heading">Voidlings Gallery</h2>
+  <div class="gallery-grid" id="galleryGrid"></div>
+  <button class="btn return-btn" onclick="showPage('hero')">Return to the Void</button>
+</div>
+
+<div id="modal">
+  <img id="modalImg">
+  <div class="modal-title">You feel drawn to this one.</div>
+  <div class="modal-subtle">Not all will enter.</div>
+  <button class="modal-btn" onclick="speakIntoVoid()">Speak it into the void</button>
+</div>
+
+<script>
+/* STARFIELD */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars=[],w,h,t=0;
+
+function resize(){
+  w=canvas.width=innerWidth;
+  h=canvas.height=innerHeight;
+}
+resize();
+window.addEventListener('resize',resize);
+
+for(let i=0;i<250;i++){
+  stars.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*1.2,
+    s:0.5+Math.random(),
+    tw:Math.random()*Math.PI*2
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,w,h);
+  t+=0.01;
+  stars.forEach(s=>{
+    const alpha=0.4+0.6*Math.sin(t*s.s+s.tw);
+    ctx.globalAlpha=alpha;
+    ctx.fillStyle="#fff";
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  ctx.globalAlpha=1;
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* GALLERY */
+const galleryGrid=document.getElementById('galleryGrid');
+const modal=document.getElementById('modal');
+const modalImg=document.getElementById('modalImg');
+let activeCard=null;
+let stored=JSON.parse(localStorage.getItem('voidlingsMarked'))||[];
+
+for(let i=1;i<=100;i++){
+  const num=String(i).padStart(3,'0');
+  const path=`${num}.png`;
+
+  const card=document.createElement('div');
+  card.className='art-card';
+  card.dataset.img=path;
+
+  const img=document.createElement('img');
+  img.src=path;
+  img.alt=`Voidling #${num}`;
+  img.loading='lazy';
+
+  card.appendChild(img);
+
+  if(stored.includes(path)){
+    card.classList.add('claimed');
+  }else{
+    card.onclick=()=>{
+      activeCard=card;
+      modalImg.src=path;
+      modal.style.display='flex';
+    };
+  }
+
+  galleryGrid.appendChild(card);
+}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function speakIntoVoid(){
+  if(!activeCard)return;
+
+  const text=`There’s something about Voidlings…
+
+I need one.
+
+tag 2 friends
+@oceanord28`;
+
+  navigator.clipboard.writeText(text).catch(()=>{});
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank');
+
+  activeCard.classList.add('claimed');
+
+  if(!stored.includes(activeCard.dataset.img)){
+    stored.push(activeCard.dataset.img);
+    localStorage.setItem('voidlingsMarked',JSON.stringify(stored));
+  }
+
+  modal.style.display='none';
+}
+
+modal.addEventListener('click',e=>{
+  if(e.target===modal) modal.style.display='none';
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') modal.style.display='none';
+});
+</script>
+
+</body>
+</html>
