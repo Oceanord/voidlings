@@ -149,7 +149,11 @@ nav{
   color:#8b0000;
   animation:redGlow 4s ease-in-out infinite;
 }
-
+.speak-btn{
+  border:1px solid rgba(247,147,26,.7);
+  color:#f7931a;
+  animation:btcGlow 3.5s ease-in-out infinite;
+}
 @keyframes redGlow{
   0%{
   box-shadow:
@@ -189,21 +193,21 @@ nav{
 }
 @keyframes btcGlow{
   0%{
-    box-shadow:
-      0 0 5px rgba(247,147,26,.6),
+    text-shadow:
+      0 0 6px rgba(247,147,26,.6),
       0 0 15px rgba(247,147,26,.4);
   }
 
   50%{
-    box-shadow:
+    text-shadow:
       0 0 12px rgba(247,147,26,1),
       0 0 30px rgba(247,147,26,.9),
       0 0 60px rgba(247,147,26,.6);
   }
 
   100%{
-    box-shadow:
-      0 0 5px rgba(247,147,26,.6),
+    text-shadow:
+      0 0 6px rgba(247,147,26,.6),
       0 0 15px rgba(247,147,26,.4);
   }
 }
@@ -397,7 +401,9 @@ nav{
   <img id="modalImg">
   <div class="modal-title">You feel drawn to this one.</div>
   <div class="modal-subtle">Not all will enter.</div>
-  <button class="modal-btn" onclick="speakIntoVoid()">Speak it into the void</button>
+  <button class="modal-btn speak-btn" onclick="speakIntoVoid()">
+Speak it into the void
+</button>
 </div>
 
 <script>
