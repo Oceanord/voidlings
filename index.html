@@ -191,31 +191,27 @@ nav{
 
 @keyframes blueGlow{
   0%{
-    text-shadow:
-      0 0 10px rgba(10,79,255,.6),
-      0 0 20px rgba(10,79,255,.5),
-      0 0 40px rgba(10,79,255,.4);
+    text-shadow:0 0 15px rgba(10,79,255,.6),
+                0 0 40px rgba(10,79,255,.4);
     opacity:.9;
   }
   50%{
-    text-shadow:
-      0 0 20px rgba(10,79,255,1),
-      0 0 40px rgba(10,79,255,.9),
-      0 0 80px rgba(10,79,255,.8),
-      0 0 120px rgba(10,79,255,.6);
+    text-shadow:0 0 30px rgba(10,79,255,1),
+                0 0 80px rgba(10,79,255,.8);
     opacity:1;
   }
   100%{
-    text-shadow:
-      0 0 10px rgba(10,79,255,.6),
-      0 0 25px rgba(10,79,255,.5),
-      0 0 50px rgba(10,79,255,.4);
+    text-shadow:0 0 15px rgba(10,79,255,.6),
+                0 0 40px rgba(10,79,255,.4);
     opacity:.95;
   }
 }
-
-@media(max-width:600px){
-  .gallery-grid{grid-template-columns:repeat(5,1fr)}
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  width: 100%;
+  margin-top: 3rem;
 }
 
 .art-card{
