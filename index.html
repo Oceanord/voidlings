@@ -145,15 +145,30 @@ nav{
 }
 
 .threshold-btn{
-  border:1px solid rgba(247,147,26,.7);
-  color:#f7931a;
-  animation:btcGlow 3.5s ease-in-out infinite;
+  border:1px solid rgba(140,0,0,.8);
+  color:#8b0000;
+  animation:redGlow 4s ease-in-out infinite;
 }
 
 @keyframes redGlow{
-  0%{box-shadow:0 0 4px rgba(232,28,28,.3)}
-  50%{box-shadow:0 0 20px rgba(232,28,28,.9)}
-  100%{box-shadow:0 0 4px rgba(232,28,28,.3)}
+  0%{
+  box-shadow:
+    0 0 6px rgba(120,0,0,.4),
+    0 0 20px rgba(120,0,0,.3);
+}
+
+50%{
+  box-shadow:
+    0 0 20px rgba(180,0,0,.8),
+    0 0 60px rgba(120,0,0,.6),
+    0 0 120px rgba(80,0,0,.5);
+}
+
+100%{
+  box-shadow:
+    0 0 6px rgba(120,0,0,.4),
+    0 0 20px rgba(120,0,0,.3);
+}
 }
 
 .threshold-btn:hover{
