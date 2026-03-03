@@ -359,38 +359,49 @@ function animate(){
 animate();
 
 /* GALLERY */
-const galleryGrid=document.getElementById('galleryGrid');
-const modal=document.getElementById('modal');
-const modalImg=document.getElementById('modalImg');
-let activeCard=null;
-let stored=JSON.parse(localStorage.getItem('voidlingsMarked'))||[];
+const galleryGrid = document.getElementById('galleryGrid');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+let activeCard = null;
 
-for(let i=1;i<=100;i++){
-  const num=String(i).padStart(3,'0');
-  const path=`${num}.png`;
+let stored = JSON.parse(localStorage.getItem('voidlingsMarked')) || [];
 
-  const card=document.createElement('div');
-  card.className='art-card';
-  card.dataset.img=path;
+/* AUTO LOAD IMAGES 001–100 BUT SKIP IF FILE DOESN'T EXIST */
 
-  const img=document.createElement('img');
-  img.src=path;
-  img.alt=`Voidling #${num}`;
-  img.loading='lazy';
+for (let i = 1; i <= 100; i++) {
 
-  card.appendChild(img);
+  const num = String(i).padStart(3, '0');
+  const path = `${num}.png`;
 
-  if(stored.includes(path)){
-    card.classList.add('claimed');
-  }else{
-    card.onclick=()=>{
-      activeCard=card;
-      modalImg.src=path;
-      modal.style.display='flex';
-    };
-  }
+  const imgTest = new Image();
+  imgTest.src = path;
 
-  galleryGrid.appendChild(card);
+  imgTest.onload = () => {
+
+    const card = document.createElement('div');
+    card.className = 'art-card';
+    card.dataset.img = path;
+
+    const img = document.createElement('img');
+    img.src = path;
+    img.alt = `Voidling #${num}`;
+    img.loading = 'lazy';
+
+    card.appendChild(img);
+
+    if (stored.includes(path)) {
+      card.classList.add('claimed');
+    } else {
+      card.onclick = () => {
+        activeCard = card;
+        modalImg.src = path;
+        modal.style.display = 'flex';
+      };
+    }
+
+    galleryGrid.appendChild(card);
+  };
+
 }
 
 function showPage(id){
