@@ -185,10 +185,33 @@ nav{
   letter-spacing:.3em;
   text-transform:uppercase;
   margin-top:1rem;
-  color:#e6f0ff;
+  color:#ffffff;
   animation:blueGlow 8s ease-in-out infinite;
 }
+.gallery-heading{
+  position: relative;
+  z-index: 1;
+}
 
+.gallery-heading::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:140%;
+  height:500%;
+  background:radial-gradient(
+    circle,
+    rgba(0,140,255,.9) 0%,
+    rgba(0,140,255,.6) 35%,
+    rgba(0,140,255,.3) 60%,
+    transparent 75%
+  );
+  filter:blur(120px);
+  z-index:-1;
+  animation:auraPulse 8s ease-in-out infinite;
+}
 @keyframes blueGlow{
   0%{
     text-shadow:
@@ -200,10 +223,10 @@ nav{
 
   50%{
     text-shadow:
-      0 0 30px rgba(0,140,255,1),
-      0 0 80px rgba(0,140,255,.9),
-      0 0 160px rgba(0,140,255,.7),
-      0 0 240px rgba(0,140,255,.5);
+    0 0 50px rgba(0,180,255,1),
+    0 0 150px rgba(0,140,255,1),
+    0 0 300px rgba(0,120,255,.9),
+    0 0 450px rgba(0,100,255,.8);
     opacity:1;
   }
 
