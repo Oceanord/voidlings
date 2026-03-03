@@ -185,8 +185,24 @@ nav{
   letter-spacing:.3em;
   text-transform:uppercase;
   margin-top:1rem;
+  color:#ffffff;
+  animation:blueGlow 6s ease-in-out infinite;
 }
 
+@keyframes blueGlow{
+  0%{
+    text-shadow:0 0 6px rgba(10,79,255,.4);
+    opacity:.85;
+  }
+  50%{
+    text-shadow:0 0 30px rgba(10,79,255,.9);
+    opacity:1;
+  }
+  100%{
+    text-shadow:0 0 8px rgba(10,79,255,.4);
+    opacity:.9;
+  }
+}
 .gallery-grid{
   display:grid;
   grid-template-columns:repeat(5,1fr);
